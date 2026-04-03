@@ -1,0 +1,15 @@
+[project]
+name = "cctv-image-save-worker"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "aio-pika>=9.6.2",
+    "asyncpg>=0.31.0",
+    "faststream>=0.6.7",
+    "opencv-python-headless>=4.13.0.92",
+    "pydantic>=2.12.5",
+    "pydantic-settings>=2.13.1",
+    "sqlalchemy>=2.0.48",
+]
