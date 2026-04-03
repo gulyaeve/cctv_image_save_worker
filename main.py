@@ -25,13 +25,14 @@ async def incident_scr_handler(incident: IncidentFullInfo):
     logging.info(incident)
     screenshot_dir = "/screenshots"
 
-    # Save screenshots to disk
-    for camera, filename in zip(incident.cameras_ids, incident.cameras_screenshots):
-        camera_data = await CamerasDAO.find_one_or_none(id=camera)
-        if camera_data:
-            camera_rtsp = camera_data.rtsp_url
-            frame = Camera(camera_rtsp)
-            frame.save_screenshot(f"{screenshot_dir}/{filename}")
+    if incident.cameras_ids:
+        # Save screenshots to disk
+        for camera, filename in zip(incident.cameras_ids, incident.cameras_screenshots):
+            camera_data = await CamerasDAO.find_one_or_none(id=camera)
+            if camera_data:
+                camera_rtsp = camera_data.rtsp_url
+                frame = Camera(camera_rtsp)
+                frame.save_screenshot(f"{screenshot_dir}/{filename}")
 
     async with broker:
         await broker.publish(
