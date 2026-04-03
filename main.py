@@ -34,11 +34,11 @@ async def incident_scr_handler(incident: IncidentFullInfo):
                 frame = Camera(camera_rtsp)
                 frame.save_screenshot(f"{screenshot_dir}/{filename}")
 
-    async with broker:
-        await broker.publish(
-            incident,
-            exchange=settings.EXCHANGE_NAME_OUTPUT
-        )
+    # async with broker:
+    await broker.publish(
+        incident,
+        exchange=settings.EXCHANGE_NAME_OUTPUT
+    )
     
 
 
