@@ -2,7 +2,7 @@ from sqlalchemy import delete, insert, select, update
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.database import async_session_maker
-from logging import log
+import logging
 
 
 class BaseDAO:
@@ -21,7 +21,7 @@ class BaseDAO:
             elif isinstance(e, Exception):
                 msg = "Unknown Exc: Data not found"
 
-            log.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            logging.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
             return None
 
     @classmethod
@@ -37,7 +37,7 @@ class BaseDAO:
             elif isinstance(e, Exception):
                 msg = "Unknown Exc: Data not found"
 
-            log.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            logging.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
             return None
     
     @classmethod
@@ -54,7 +54,7 @@ class BaseDAO:
             elif isinstance(e, Exception):
                 msg = "Unknown Exc: Cannot insert data into table"
 
-            log.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            logging.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
             return None
 
     @classmethod
@@ -70,7 +70,7 @@ class BaseDAO:
             elif isinstance(e, Exception):
                 msg = "Unknown Exc: Cannot delete data"
 
-            log.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            logging.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
             return None
 
     # @classmethod
@@ -97,7 +97,7 @@ class BaseDAO:
                 msg = "Unknown Exc"
             msg += ": Cannot bulk insert data into table"
 
-            log.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            logging.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
             return None
         
     @classmethod
@@ -119,5 +119,5 @@ class BaseDAO:
             elif isinstance(e, Exception):
                 msg = "Unknown Exc: Cannot update data in table"
 
-            log.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
+            logging.error(msg, extra={"table": cls.model.__tablename__}, exc_info=True)
             return None
