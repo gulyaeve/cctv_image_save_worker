@@ -7,6 +7,19 @@ class Settings(BaseSettings):
     # MAX_API_TOKEN: str
     # MAX_CHAT_ID: str
 
+    POSTGRES_HOST: str
+    POSTGRES_PORT: int
+    POSTGRES_USER: str
+    POSTGRES_PASSWORD: str
+    POSTGRES_DB: str
+
+    @property
+    def database_url(self):
+        user = f"{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
+        database = f"{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
+
+        return f"postgresql+asyncpg://{user}@{database}"
+
     # RabbitMQ
     RABBITMQ_HOST: str
     RABBITMQ_PORT: int
