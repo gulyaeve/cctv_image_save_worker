@@ -21,7 +21,7 @@ app = FastStream(broker)
 
 
 @broker.subscriber(queue, exchange_in)
-async def incident_max_handler(incident: IncidentFullInfo):
+async def incident_scr_handler(incident: IncidentFullInfo):
     logging.info(incident)
     screenshot_dir = "/screenshots"
 
