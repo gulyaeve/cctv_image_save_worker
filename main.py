@@ -1,12 +1,12 @@
 import asyncio
 import logging
-import aio_pika
+# import aio_pika
 from faststream import FastStream
 from app.camera_utils.streaming import Camera
 from app.cameras.dao import CamerasDAO
 from app.schemas import IncidentFullInfo
 from app.settings import settings
-from faststream.rabbit import RabbitBroker, RabbitQueue, ExchangeType, RabbitExchange
+from faststream.rabbit import RabbitBroker, RabbitQueue
 
 
 # Настройка логирования
@@ -14,14 +14,14 @@ logging.basicConfig(level=logging.INFO)
 
 
 queue = RabbitQueue(settings.QUEUE_NAME, auto_delete=False)
-exchange_out = RabbitExchange(settings.EXCHANGE_NAME_OUTPUT, ExchangeType.FANOUT)
-exchange_in = RabbitExchange(settings.EXCHANGE_NAME_INPUT, ExchangeType.DIRECT)
+# exchange_out = RabbitExchange(settings.EXCHANGE_NAME_OUTPUT, ExchangeType.FANOUT)
+# exchange_in = RabbitExchange(settings.EXCHANGE_NAME_INPUT, ExchangeType.DIRECT)
 
 broker = RabbitBroker(url=settings.rabbitmq_url)
 app = FastStream(broker)
 
 
-@broker.subscriber(queue, exchange_in)
+@broker.subscriber(queue)
 async def incident_scr_handler(incident: IncidentFullInfo):
     logging.info(incident)
     screenshot_dir = "/screenshots"
