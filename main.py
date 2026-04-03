@@ -16,6 +16,7 @@ logging.basicConfig(level=logging.INFO)
 queue = RabbitQueue(settings.QUEUE_NAME, auto_delete=False)
 exchange_out = RabbitExchange(settings.EXCHANGE_NAME_OUTPUT, ExchangeType.FANOUT)
 exchange_in = RabbitExchange(settings.EXCHANGE_NAME_INPUT, ExchangeType.DIRECT)
+
 broker = RabbitBroker(url=settings.rabbitmq_url)
 app = FastStream(broker)
 
@@ -43,12 +44,12 @@ async def incident_scr_handler(incident: IncidentFullInfo):
 
 
 async def main():
-    async with broker:
-        img_queue: aio_pika.RobustQueue = await broker.declare_queue(queue)
-        img_exchange: aio_pika.RobustExchange = await broker.declare_exchange(exchange_in)
-        await img_queue.bind(exchange=img_exchange)
+    # async with broker:
+    #     img_queue: aio_pika.RobustQueue = await broker.declare_queue(queue)
+    #     img_exchange: aio_pika.RobustExchange = await broker.declare_exchange(exchange_in)
+    #     await img_queue.bind(exchange=img_exchange)
 
-        await broker.declare_exchange(exchange_out)
+    #     await broker.declare_exchange(exchange_out)
     await app.run()
 
 
