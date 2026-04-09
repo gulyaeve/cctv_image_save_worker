@@ -16,7 +16,7 @@ class IncidentFullInfo(BaseModel):
     current_group: str
     current_schedule: str
     current_classroom: str
-    current_visor: str
+    current_visor: Optional[str] = None
     current_building: str
 
     # def __str__(self):
