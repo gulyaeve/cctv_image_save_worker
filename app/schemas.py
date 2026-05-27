@@ -1,5 +1,6 @@
 from datetime import datetime
 from typing import Optional
+
 from pydantic import BaseModel
 
 
@@ -7,6 +8,7 @@ class IncidentFullInfo(BaseModel):
     id: int
     comment: str
     event: int
+    event_type: int
     time_created: datetime
     visor_id: int
     status: int
@@ -35,8 +37,7 @@ class IncidentFullInfo(BaseModel):
     #     message += f"Занятие: <i>{self.current_schedule}</i>\n"
     #     message += f"Преподаватель: <i>{self.current_teacher}</i>\n"
     #     message += f"Группа: <i>{self.current_group}</i>\n"
-        
-    #     return message
-    
 
-    # 0 всё хор, 1 не см (системный), 2 инц, 3 контр 
+    #     return message
+
+    # 0 всё хор, 1 не см (системный), 2 инц, 3 контр
